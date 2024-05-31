@@ -1,0 +1,96 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOWCGnilOvpIfjExbGdtq4iR6gXnmi8TESCQ&s');
+    background-size: 100%;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    color: black;
+}
+
+
+.heading .main-heading {
+    text-align: center;
+    font-size: 3.4rem;
+    flex: 1;
+    font-weight: 700;
+    font-family: "Lato", sans-serif;
+}
+
+.heading .side-heading {
+    background: white;
+    padding: 0.2rem 1.2rem;
+    border-radius: 30px;
+    color: black;
+    border: 2px solid black;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.container .sub-container {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border-radius: 10px;
+    min-width: 400px;
+    width: 65%;
+    gap: 2rem;
+}
+
+.container .sub-container .search-box{
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container .sub-container .search-box input {
+    flex: 1;
+    padding: 1rem 1.4rem;
+    border-radius: 42px;
+    border:none;
+    font-size: 1.5rem;
+}
+
+.search-box p {
+    cursor: pointer;
+    font-size: 1.4rem;
+    padding: 1.1rem;
+    border-radius: 50%;
+    background-color: black;
+    color: white;
+}
+
+.container .sub-container button {
+    align-self: center;
+    padding: 1rem 2rem;
+    background: red;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+}
