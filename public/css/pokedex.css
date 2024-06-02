@@ -85,6 +85,7 @@ header h1 {
   }
   
   .type {
+    gap: 1rem;
     display: flex;
     justify-content: center;
   }

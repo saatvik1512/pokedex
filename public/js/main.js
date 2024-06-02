@@ -1,6 +1,6 @@
 async function pokemon() {
     const pokemonPromises = [];
-    for (let i = 1; i < 60; i++) {
+    for (let i = 1; i < 152; i++) {
         pokemonPromises.push(getAPI(i));
     }
     await Promise.all(pokemonPromises);
@@ -16,7 +16,6 @@ async function getAPI(index){
         const pokemonName = data.name;
         const pokemonSprite = data.sprites.front_default;
         const types = data.types.map(element => element.type.name)
-        console.log(data.stats)
         const hp = data.stats[0].base_stat;
         const attack = data.stats[1].base_stat;
         const defense = data.stats[2].base_stat;
@@ -29,51 +28,45 @@ async function getAPI(index){
 
 function makePokeMonCard(pokemonName, pokemonSprite, types, hp, attack, defense, speed){
     const div = document.createElement('div');
-    div.classList.add('pokemon-card')
-    div.innerHTML = `<div class='card-content'>
-    <div class='pokemon-hp'><h1>HP:</h1> <span>${hp}</span></div>
-    <img src='${pokemonSprite}' alt='arcanine'>
-    <div class='pokemon-name'><h1>${pokemonName}</h1></div>
-    <div class='type'></div>`
-    for (const item of types){
+    div.classList.add('pokemon-card');
+    div.innerHTML = `
+        <div class='card-content'>
+            <div class='pokemon-hp'><h1>HP:</h1> <span>${hp}</span></div>
+            <img src='${pokemonSprite}' alt='${pokemonName}'>
+            <div class='pokemon-name'><h1>${pokemonName}</h1></div>
+            <div class='type'></div>
+            <div class='stats'>
+                <span>
+                    <h1>${attack}</h1>
+                    <p>Attack</p>
+                </span>
+                <span>
+                    <h1>${defense}</h1>
+                    <p>Defense</p>
+                </span>
+                <span>
+                    <h1>${speed}</h1>
+                    <p>Speed</p>
+                </span>
+            </div>
+        </div>`;
+    
+    const typeDiv = div.querySelector('.type');
+    for (const item of types) {
         const color = getPokemonColor(item);
-        div.innerHTML += `<p class='type-heading' style="font-weight: 700;
-        padding: 0.2rem 1.3rem;
-        background-color: ${color};
-        border-radius: 32px;
-        color: white;
-        font-size: 0.8rem;">${item}</p>`
+        const p = document.createElement('p');
+        p.style.cssText = `
+            font-weight: 700;
+            padding: 0.2rem 1.3rem;
+            background-color: ${color};
+            border-radius: 32px;
+            color: white;
+            font-size: 0.8rem;`;
+        p.textContent = item;
+        typeDiv.appendChild(p);
     }
-    div.innerHTML += `<div class='stats'>
-    <span>
-      <h1>${attack}</h1>
-      <p>Attack</p>
-    </span>
-    <span>
-      <h1>${defense}</h1>
-      <p>Defense</p>
-    </span>
-    <span>
-      <h1>${speed}</h1>
-      <p>Speed</p>
-    </span>
-  </div>
-</div>`
-  mainContainer.append(div)
-    // <div class='type'>
-    //   <p class='type-heading'>fire</p>
-    // </div>
-    // div.classList.add('pokemon-card')
-    // const subdiv = document.createElement('div');
-    // subdiv.classList.add('subdiv')
-    // div.append(subdiv)
-    // mainContainer.append(div);
-    // for (const item of types){
-    //     const color = getPokemonColor(item);
-    //     subdiv.innerHTML += `<p style = "padding: 0.4rem 1rem;
-    //     border: 2px solid ${color};
-    //     border-radius: 20px;">${item}</p>`
-    // }
+
+    mainContainer.append(div);
 }
 
 
