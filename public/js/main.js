@@ -1,6 +1,6 @@
 async function pokemon() {
     const pokemonPromises = [];
-    for (let i = 1; i < 152; i++) {
+    for (let i = 1; i < 20; i++) {
         pokemonPromises.push(getAPI(i));
     }
     await Promise.all(pokemonPromises);
@@ -14,19 +14,19 @@ async function getAPI(index){
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${index}/`);
         const data = await response.json();
         const pokemonName = data.name;
-        const pokemonSprite = data.sprites.front_default;
+        const pokemonSprite = data.sprites.other.home.front_default;
         const types = data.types.map(element => element.type.name)
         const hp = data.stats[0].base_stat;
         const attack = data.stats[1].base_stat;
         const defense = data.stats[2].base_stat;
         const speed = data.stats[5].base_stat;
-        makePokeMonCard(pokemonName, pokemonSprite, types, hp, attack, defense, speed);
+        makePokeMonCard(pokemonName, pokemonSprite, types, hp, attack, defense, speed,index);
     } catch (error) {
         console.error(error)
     }
 }
 
-function makePokeMonCard(pokemonName, pokemonSprite, types, hp, attack, defense, speed){
+function makePokeMonCard(pokemonName, pokemonSprite, types, hp, attack, defense, speed, index){
     const div = document.createElement('div');
     div.classList.add('pokemon-card');
     div.innerHTML = `
@@ -67,6 +67,9 @@ function makePokeMonCard(pokemonName, pokemonSprite, types, hp, attack, defense,
     }
 
     mainContainer.append(div);
+    div.addEventListener('click', ()=>{
+        window.location.href = `/pokedex/${index}`;
+    })
 }
 
 
@@ -93,5 +96,6 @@ function getPokemonColor(pokemonColor) {
     };
     return typeColors[pokemonColor]
 }
+
 
 pokemon()
