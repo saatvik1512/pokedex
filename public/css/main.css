@@ -99,3 +99,33 @@ body {
     border-radius: 30px;
     cursor: pointer;
 }
+
+.search-box {
+    position: relative;
+}
+
+.list-of-pokemon {
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: white;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.list-of-pokemon li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.list-of-pokemon li:hover {
+    background-color: #f0f0f0;
+}
+
+
+.list {
+    margin-top: -2rem;
+}
